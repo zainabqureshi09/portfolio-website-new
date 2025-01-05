@@ -1,63 +1,113 @@
 
+"use client";
 
-export default function ContactPage() {
+import { useState } from "react";
+
+
+export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!formData.name || !formData.email || !formData.message) {
+      setError("All fields are required.");
+      return;
+    }
+
+    setError("");
+
+    // Submit to Formspree
+    const res = await fetch("https://formspree.io/f/xgvvpykn", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    if (res.ok) {
+      setSubmitted(true);
+      setFormData({ name: "", email: "", message: "" });
+    } else {
+      setError("Something went wrong. Please try again later.");
+    }
+  };
+
   return (
-    <div>
-      <section className="py-20 px-6 text-blue-900 text-center min-h-screen">
-        <h1 className="text-5xl font-bold mb-6">Contact Me</h1>
-        <p className="text-lg mb-8">Feel free to reach out via this form:</p>
-        <form
-          action="https://formspree.io/f/xgvvpykn" // Replace `your_formspree_id` with your actual Formspree ID
-          method="POST"
-          className="max-w-lg mx-auto bg-white text-darkPink p-6 rounded-lg shadow-lg"
-        >
-          <div className="mb-4">
-            <label htmlFor="name" className="block text-left mb-2 font-semibold">
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-seaGreen"
-              placeholder="Your Name"
-              required
-            />
+    <>
+    <div className="flex min-h-screen items-center justify-center">
+      <div className="w-full max-w-lg p-6 rounded-lg shadow-md">
+        {submitted ? (
+          <div className="text-center">
+            <h1 className="text-2xl text-purple-700 font-bold">Thank you!</h1>
+            <p className="text-xl text-purple-700 ">Your message has been sent successfully.</p>
           </div>
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-left mb-2 font-semibold">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-seaGreen"
-              placeholder="Your Email"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="message" className="block text-left mb-2 font-semibold">
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-seaGreen"
-              rows={5}
-              placeholder="Your Message"
-              required
-            />
-          </div>
-          <button
-            type="submit"
-            className="px-6 py-3 bg-blue-200 text-blue-900 font-bold rounded-md hover:bg-blue-200 hover:text-blue-800 transition duration-300"
-          >
-            Send Message
-          </button>
-        </form>
-      </section>
+        ) : (
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <h1 className="text-3xl text-blue-800 font-bold text-center">Contact Me</h1>
+            {error && <p className="text-sm text-red-500">{error}</p>}
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Name</label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="Your name"
+                className="mt-1 block w-full rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Email</label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="Your email"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Message</label>
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder="Your message"
+                rows={4}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                required
+              />
+            </div>
+            <div className="flex justify-center">
+            <button
+              type="submit"
+              className="w-70%  bg-blue-200 text-blue-800 py-2 px-4 rounded-md hover:bg-blue-300 transition"
+            >
+              Send Message
+            </button>
+            </div>
+          </form>
+        )}
+        
+      </div>
     </div>
+     <div>
+
+     </div>
+     </>
   );
 }

@@ -5,6 +5,7 @@ import Image from 'next/image';
 
 export default function HeroSection() {
   return (
+    <>
     <div className="relative bg-gray-900 text-white p-9 flex items-center justify-center">
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 opacity-30 pointer-events-none" />
@@ -55,6 +56,12 @@ export default function HeroSection() {
           />
         </motion.div>
       </div>
+      
     </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    </>
   );
 }

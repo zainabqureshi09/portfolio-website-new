@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
+// import Image from 'next/image';
 import Link from 'next/link';
 
 export default function AboutSection() {
@@ -11,12 +11,12 @@ export default function AboutSection() {
       {/* Content */}
       <div className="container text-2xl text-purple-600 mx-auto flex flex-col lg:flex-row items-center">
         {/* Left Image */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 1 }}
           viewport={{ once: true }}
-          className="lg:w-1/2 mb-10 lg:mb-0 flex justify-center"
+          className="lg:w-1/2 mb-10 lg:mb-0 flex p-12 justify-center"
         >
           <Image
             src="/about.jpg" // Replace with your image path
@@ -25,7 +25,7 @@ export default function AboutSection() {
             width={200}
             height={200}
           />
-        </motion.div>
+        </motion.div> */}
 
         {/* Right Text */}
         <motion.div
