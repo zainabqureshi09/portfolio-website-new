@@ -25,12 +25,6 @@ const projects = [
     vercel: "https://to-do-web-blush.vercel.app/",
   },
   {
-    title: "Project 4",
-    description: "A dummy project description for Project 4.",
-    github: "https://github.com/example/project4",
-    vercel: "https://project4.vercel.app",
-  },
-  {
     title: "Expenses Tracker",
     description: " Built with HTML5, CSS3, and TypeScript, it's sleek, easy-to-use, and ready to help you save. Want to see it in action? 🚀",
     github: "https://github.com/zainabqureshi09/expenses-tracker",
@@ -79,7 +73,7 @@ export default function ProjectsPage() {
     <Box sx={{ padding: "2rem",  minHeight: "100vh" }}>
      
        
-     <h1  className="text-5xl font-bold text-center mb-12 text-blue-800">
+     <h1  className="text-5xl font-bold text-center p-12 mb-12 text-blue-800">
         My Projects
         </h1>
 
