@@ -22,7 +22,7 @@ export default function Navbar() {
     <div  className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-[75%] max-w-4xl bg-transparent text-blue-500 flex items-center justify-between px-6 py-3 rounded-full shadow-lg backdrop-blur-md">
      
         {/* Logo */}
-        <Link href="/" className="text-2xl font-bold text-blue-600 hover:text-blue-800 transition duration-300">
+        <Link href="/" className="text-2xl font-bold text-blue-500 hover:text-blue-800 transition duration-300">
             Zainab Ayaz
         </Link>
 

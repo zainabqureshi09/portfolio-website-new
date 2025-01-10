@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -28,7 +27,6 @@ export default function Contact() {
 
     setError("");
 
-    // Submit to Formspree
     const res = await fetch("https://formspree.io/f/xgvvpykn", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -44,70 +42,95 @@ export default function Contact() {
   };
 
   return (
-    <>
-    <div className="flex min-h-screen items-center justify-center">
-      <div className="w-full max-w-lg p-6 rounded-lg shadow-md">
-        {submitted ? (
-          <div className="text-center">
-            <h1 className="text-2xl text-purple-700 font-bold">Thank you!</h1>
-            <p className="text-xl text-purple-700 ">Your message has been sent successfully.</p>
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="w-full max-w-4xl">
+        <h1 className="text-4xl text-center font-bold text-purple-700 mb-4">
+          CONTACT
+        </h1>
+        <p className="text-center text-blue-600 font-medium mb-10">
+          I&apos;d <span className="text-purple-700">♥</span> to help! Feel free to say hello!
+        </p>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div className="space-y-6">
+            {submitted ? (
+              <div className="text-center">
+                <h2 className="text-2xl font-bold text-purple-700">Thank You!</h2>
+                <p className="text-lg text-blue-600">
+                  Your message has been sent successfully. I&apos;ll be in touch soon!
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {error && (
+                  <p className="text-red-500 text-center">{error}</p>
+                )}
+                <div>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Your Name"
+                    className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    required
+                  />
+                </div>
+                <div>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Email"
+                    className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    required
+                  />
+                </div>
+                <div>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Message"
+                    rows={5}
+                    className="w-full p-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+                    required
+                  />
+                </div>
+                <div className="text-center">
+                <button type="submit"
+        className="px-6 py-3 text-white bg-purple-600 rounded-md outline-none focus:ring-4 focus:ring-purple-300 hover:bg-purple-700 transition"
+      >
+        Send Message
+      </button>
+                </div>
+              </form>
+            )}
           </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <h1 className="text-3xl text-blue-800 font-bold text-center">Contact Me</h1>
-            {error && <p className="text-sm text-red-500">{error}</p>}
+          <div className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Name</label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                placeholder="Your name"
-                className="mt-1 block w-full rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                required
-              />
+              <h2 className="text-lg font-semibold text-purple-700">Zainab Ayaz frontend web developer</h2>
+              <p className="text-blue-600">Karachi, Pakistan</p>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Email</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="Your email"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                required
-              />
+              <p className="text-blue-600">
+                <strong className="text-purple-700">Phone:</strong> +923171214703
+              </p>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Message</label>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                placeholder="Your message"
-                rows={4}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
-                required
-              />
+              <p className="text-blue-600">
+                <strong className="text-purple-700">WhatsApp:</strong> +923272720895
+              </p>
             </div>
-            <div className="flex justify-center">
-            <button
-              type="submit"
-              className="w-70%  bg-blue-200 text-blue-800 py-2 px-4 rounded-md hover:bg-blue-300 transition"
-            >
-              Send Message
-            </button>
+            <div>
+              <p className="text-blue-600">
+                <strong className="text-purple-700">Email:</strong>{" "}
+                zainab.cyber.dev@gmail.com
+              </p>
             </div>
-          </form>
-        )}
-        
+            </div>
+        </div>
       </div>
     </div>
-     <div>
-
-     </div>
-     </>
   );
 }
